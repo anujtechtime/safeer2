@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
@@ -62,3 +63,27 @@ class SalerefOrder(models.Model):
                 new_order_lines.append(new_order_line)
 
             self.order_line = new_order_lines            
+
+
+class AccountMoveLineLi(models.Model):
+    _inherit = 'account.move.line'
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        iqd_currency = self.env.ref('base.IQD', raise_if_not_found=False)
+        if not iqd_currency:
+            raise ValidationError("IQD currency must exist in the system.")
+
+        company_currency = self.env.company.currency_id
+        for vals in vals_list:
+            # Only apply if currency is not set and company currency is USD
+            if company_currency.name == 'USD':
+                # Get the exchange rate for the journal entry date
+                move_date = vals.get('date') or fields.Date.context_today(self)
+                rate = iqd_currency.with_context(date=move_date).rate or 0.0
+                if rate > 0.0:
+                    usd_to_iqd = 1 / rate
+                    amount = vals.get('debit') or vals.get('credit') or 0.0
+                    vals['currency_id'] = iqd_currency.id
+                    vals['amount_currency'] = round(amount * usd_to_iqd, 3)
+        return super(AccountMoveLineLi, self).create(vals_list)         
