@@ -194,7 +194,7 @@ class SafeerInvoice(models.Model):
 
 
 
-class AccountMoveLine(models.Model):
+class AccountMoveLineLi(models.Model):
     _inherit = 'account.move.line'
 
     @api.model_create_multi
@@ -215,7 +215,7 @@ class AccountMoveLine(models.Model):
                     amount = vals.get('debit') or vals.get('credit') or 0.0
                     vals['currency_id'] = iqd_currency.id
                     vals['amount_currency'] = round(amount * usd_to_iqd, 3)
-        return super().create(vals_list)         
+        return super(AccountMoveLineLi, self).create(vals_list)         
 
 class SaleAdvancePaymentInvSafeer(models.TransientModel):
     _inherit = "sale.advance.payment.inv"
