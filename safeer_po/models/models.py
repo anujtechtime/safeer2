@@ -206,7 +206,7 @@ class AccountMoveLine(models.Model):
         company_currency = self.env.company.currency_id
         for vals in vals_list:
             # Only apply if currency is not set and company currency is USD
-            if not vals.get('currency_id') and company_currency.name == 'USD':
+            if company_currency.name == 'USD':
                 # Get the exchange rate for the journal entry date
                 move_date = vals.get('date') or fields.Date.context_today(self)
                 rate = iqd_currency.with_context(date=move_date).rate or 0.0
