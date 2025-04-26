@@ -32,8 +32,8 @@ class PartnerView(models.TransientModel):
     partner_category_ids = fields.Many2many('res.partner.category',
                                             string='Partner tags')
     reconciled = fields.Selection([
-        ('unreconciled', 'Unreconciled Only'), ('all', 'All')],
-        string='Reconcile Type', default='all')
+        ('unreconciled', 'Unreconciled Only')],
+        string='Reconcile Type', default='unreconciled')
 
     account_type_ids = fields.Many2many('account.account.type',string='Account Type',
                                         domain=[('type', 'in', ('receivable', 'payable'))])
@@ -161,6 +161,8 @@ class PartnerView(models.TransientModel):
                 accounts.append(('divider', j.company_id.name))
                 o_company = j.company_id
             accounts.append((j.id, j.name))
+
+
 
         filter_dict = {
             'journal_ids': r.journal_ids.ids,
@@ -291,6 +293,7 @@ class PartnerView(models.TransientModel):
         if data.get('partners'):
             WHERE += ' AND p.id IN %s' % str(
                 tuple(data.get('partners').ids) + tuple([0]))
+
         if data.get('reconciled') == 'unreconciled':
             WHERE += ' AND l.full_reconcile_id is null AND' \
                      ' l.balance != 0 AND a.reconcile is true'
@@ -300,7 +303,6 @@ class PartnerView(models.TransientModel):
                     l.amount_currency, l.ref AS lref, l.name AS lname, 
                     COALESCE(l.debit,0) AS debit, COALESCE(l.credit,0) AS credit, 
                     COALESCE(SUM(l.balance),0) AS balance,\
-                    COALESCE(SUM(l.balance / 1310),0) AS lamountcurrency,
                     m.name AS move_name, c.symbol AS currency_code,c.position AS currency_position, p.name AS partner_name\
                     FROM account_move_line l\
                     JOIN account_move m ON (l.move_id=m.id)\
@@ -309,7 +311,7 @@ class PartnerView(models.TransientModel):
                     LEFT JOIN res_partner p ON (l.partner_id=p.id)\
                     JOIN account_journal j ON (l.journal_id=j.id)\
                     JOIN account_account acc ON (l.account_id = acc.id) '''
-                    + WHERE + new_final_filter + ''' GROUP BY l.id, m.id,  l.account_id, l.date, j.code, l.currency_id, l.amount_currency, l.ref, l.name, m.name, c.symbol, c.position, p.name ORDER BY l.date''' )
+                    + WHERE + new_final_filter + ''' GROUP BY l.id, m.id,  l.account_id, l.date, j.code, l.currency_id, l.amount_currency, l.ref, l.name, m.name, c.symbol, c.position, p.name''' )
         if data.get('accounts'):
             params = tuple(where_params)
         else:

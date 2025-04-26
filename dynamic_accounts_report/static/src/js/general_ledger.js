@@ -196,7 +196,7 @@ odoo.define('dynamic_cash_flow_statements.general_ledger', function (require) {
                 ],
             }).then(function(data) {
                 var action = {
-                    // 'type': 'ir_actions_dynamic_xlsx_download',
+                    'type': 'ir_actions_dynamic_xlsx_download',
                     'data': {
                          'model': 'account.general.ledger',
                          'options': JSON.stringify(data['filters']),
@@ -206,8 +206,7 @@ odoo.define('dynamic_cash_flow_statements.general_ledger', function (require) {
                          'dfr_data': JSON.stringify(data),
                     },
                 };
-                // return self.do_action(action);
-                core.action_registry.map.t_b.prototype.downloadXlsx(action)
+                return self.do_action(action);
             });
         },
 

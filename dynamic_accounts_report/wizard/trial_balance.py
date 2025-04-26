@@ -31,7 +31,7 @@ class TrialView(models.TransientModel):
 
         data = {
             'display_account': r.display_account,
-            'model': self,
+            'model':self,
             'journals': r.journal_ids,
             'target_move': r.target_move,
 
@@ -136,12 +136,10 @@ class TrialView(models.TransientModel):
         debit_total = 0
         debit_total = sum(x['debit'] for x in account_res)
         credit_total = sum(x['credit'] for x in account_res)
-        debit_balance = round(debit_total,2) - round(credit_total,2)
         return {
             'doc_ids': self.ids,
             'debit_total': debit_total,
             'credit_total': credit_total,
-            'debit_balance':debit_balance,
             'docs': docs,
             'time': time,
             'Accounts': account_res,

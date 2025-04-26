@@ -19,10 +19,9 @@
                     <thead>
                         <tr>
                             <th colspan="6"></th>
-                            <th style="display : none; text-align: right; padding-right: 50px;">Debit</th>
-                            <th style="display : none; text-align: right; padding-right: 50px;">Credit</th>
-                            <th style=" text-align: right; padding-right: 50px;">Balance</th>
-                            <th style="text-align: right; padding-right: 50px;">Amount in currency</th>
+                            <th style="text-align: right; padding-right: 50px;">Debit</th>
+                            <th style="text-align: right; padding-right: 50px;">Credit</th>
+                            <th style="text-align: right; padding-right: 50px;">Balance</th>
                         </tr>
                     </thead>
 					<tbody>
@@ -62,10 +61,9 @@
 													</div>
 												</div>
 											</td>
-											<td  style="display : none; "><t t-esc="a['m_debit']" t-att-style="style"/></td>
-											<td style="display : none; "><t t-esc="a['m_credit']" t-att-style="style"/></td>
-											<td  t-att-style="fr_padding"><t t-esc="a['m_balance']" t-att-style="style"/></td>
-                                            <td t-att-style="fr_padding"><t t-esc="a['m_amount_in_currecncy']" t-att-style="style"/></td>
+											<td t-att-style="fr_padding"><t t-esc="a['m_debit']" t-att-style="style"/></td>
+											<td t-att-style="fr_padding"><t t-esc="a['m_credit']" t-att-style="style"/></td>
+											<td t-att-style="fr_padding"><t t-esc="a['m_balance']" t-att-style="style"/></td>
 
 
 
@@ -97,10 +95,9 @@
 									<th colspan="6" t-att-style="style">
 										<t t-esc="a['name']"/>
 									</th>
-									<td  style="display : none; "><t t-esc="a['m_debit']"/></td>
-									<td style="display : none; "><t t-esc="a['m_credit']"/></td>
+									<td t-att-style="fr_padding"><t t-esc="a['m_debit']"/></td>
+									<td t-att-style="fr_padding"><t t-esc="a['m_credit']"/></td>
 									<td t-att-style="fr_padding"><t t-esc="a['m_balance']"/></td>
-                                    <td t-att-style="fr_padding"><t t-esc="a['m_amount_in_currecncy']"/></td>
 								</tr>
 							</t>
 

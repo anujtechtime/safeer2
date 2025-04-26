@@ -1,10 +1,10 @@
 Dynamic Financial Reports
 =========================
-* Dynamic financial reports for Odoo 15 community editions
+* Dynamic financial reports for Odoo 13 community editions
 
 Installation
 ============
-	- www.odoo.com/documentation/15.0/setup/install.html
+	- www.odoo.com/documentation/13.0/setup/install.html
 	- Install our custom addon
 
 License
@@ -19,10 +19,10 @@ Company
 Credits
 -------
 * Developer:
-(v15) Jibin @ Cybrosys
-(v15) Mehjabin @ Cybrosys
-(v15) Mily @ Cybrosys
-(v15) Aneesh @ Cybrosys
+(v13) Jibin @ Cybrosys
+(v13) Mehjabin @ Cybrosys
+(v13) Mily @ Cybrosys
+(v13) Aneesh @ Cybrosys
 
 Contacts
 --------

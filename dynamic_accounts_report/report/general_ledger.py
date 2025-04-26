@@ -6,9 +6,10 @@ class GeneralLedger(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
+
         if self.env.context.get('trial_pdf_report'):
+
             if data.get('report_data'):
-                print("data@@@@@@@@@@@@@@@@@9999999999999999999",data)
                 data.update({'account_data': data.get('report_data')['report_lines'],
                              'Filters': data.get('report_data')['filters'],
                              'debit_total': data.get('report_data')['debit_total'],

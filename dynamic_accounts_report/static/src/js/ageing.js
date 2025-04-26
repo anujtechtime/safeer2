@@ -9,7 +9,7 @@ odoo.define('dynamic_accounts_report.ageing', function (require) {
     var QWeb = core.qweb;
     var _t = core._t;
 
-    var datepicker = require('web.datepicker');
+        var datepicker = require('web.datepicker');
     var time = require('web.time');
 
     window.click_num = 0;
@@ -125,6 +125,7 @@ odoo.define('dynamic_accounts_report.ageing', function (require) {
 
                             }
                             var child=[];
+
                         self.$('.table_view_tb').html(QWeb.render('Ageingtable', {
 
                                             report_lines : datas['report_lines'],
@@ -195,7 +196,7 @@ odoo.define('dynamic_accounts_report.ageing', function (require) {
             }).then(function(data) {
 
                 var action = {
-//                    'type': 'ir_actions_dynamic_xlsx_download',
+                    'type': 'ir_actions_dynamic_xlsx_download',
                     'data': {
                          'model': 'account.partner.ageing',
                          'options': JSON.stringify(data['filters']),
@@ -205,8 +206,7 @@ odoo.define('dynamic_accounts_report.ageing', function (require) {
                          'dfr_data': JSON.stringify(data),
                     },
                 };
-//                return self.do_action(action);
-                    core.action_registry.map.t_b.prototype.downloadXlsx(action)
+                return self.do_action(action);
             });
         },
 
@@ -265,7 +265,7 @@ odoo.define('dynamic_accounts_report.ageing', function (require) {
 
             var offset = 0;
             var td = $(event.currentTarget).next('tr').find('td');
-            if (td.length >= 2) {
+            if (td.length == 1) {
 
                     self._rpc({
                         model: 'account.partner.ageing',
@@ -348,14 +348,15 @@ odoo.define('dynamic_accounts_report.ageing', function (require) {
 
             var filter_data_selected = {};
 
+//            if ($("#date_from").val()) {
+//                var dateString = $("#date_from").val();
+//
+//                filter_data_selected.date_from= dateString;
+//            }
+
             if (this.$el.find('.datetimepicker-input[name="date_from"]').val()) {
                 filter_data_selected.date_from = moment(this.$el.find('.datetimepicker-input[name="date_from"]').val(), time.getLangDateFormat()).locale('en').format('YYYY-MM-DD');
             }
-
-
-
-
-
             var partner_ids = [];
             var partner_text = [];
             var span_res = document.getElementById("partner_res")

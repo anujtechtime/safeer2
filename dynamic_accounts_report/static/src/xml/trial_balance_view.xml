@@ -27,14 +27,10 @@
                             <t t-if="filter['date_from']">
                                 <th class="mon_fld">Initial Debit</th>
                                 <th class="mon_fld">Initial Credit</th>
-                                <th class="mon_fld">balance</th>
-                                <th class="mon_fld">Amount In Currency</th>
 
                             </t>
                             <th class="mon_fld">Debit</th>
                             <th class="mon_fld">Credit</th>
-                            <th class="mon_fld">balance</th>
-                            <th class="mon_fld">Amount In Currency</th>
                         </tr>
                     </thead>
 
@@ -86,18 +82,6 @@
                                                 <t t-esc="currency[0]"/>
                                                 <t t-raw="account['Init_balance']['credit']"/>
                                             </td>
-                                            <td class="mon_fld">
-                                                <t t-esc="currency[0]"/>
-                                                <t t-raw="account['Init_balance']['balance']"/>
-                                            </td>
-                                            <td class="mon_fld">
-                                                <t t-if="account['Init_balance']['balance'] == 0">
-                                                    <span>-</span>
-                                                </t>
-                                                <t t-else="">
-                                                    $<t t-esc="Math.round(account.Init_balance.balance.replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '') / 1310 * Math.pow(10, 2)) / Math.pow(10, 2)"/>
-                                                </t>
-                                            </td>
                                         </t>
                                         <t t-else="">
                                             <td class="mon_fld">
@@ -107,20 +91,6 @@
                                             <td class="mon_fld">
                                                 <t t-raw="account['Init_balance']['credit']"/>
                                                 <t t-esc="currency[0]"/>
-                                            </td>
-                                            
-
-                                            <td class="mon_fld">
-                                                <t t-raw="account['Init_balance']['balance']"/>
-                                                <t t-esc="currency[0]"/>
-                                            </td>
-                                            <td class="mon_fld">
-                                                <t t-if="account['Init_balance']['balance'] == 0">
-                                                    <span>-</span>
-                                                </t>
-                                                <t t-else="">
-                                                    $<t t-esc="Math.round(account.Init_balance.balance.replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '') / 1310 * Math.pow(10, 2)) / Math.pow(10, 2)"/>
-                                                </t>
                                             </td>
 
 
@@ -156,18 +126,6 @@
                                         <t t-esc="currency[0]"/>
                                         <t t-raw="account['credit']"/>
                                     </td>
-                                    <td class="mon_fld">
-                                        <t t-esc="currency[0]"/>
-                                        <t t-raw="account['balance']"/>
-                                    </td>
-                                    <td class="mon_fld">
-                                        <t t-if="account['balance'] == 0">
-                                            <span>-</span>
-                                        </t>
-                                        <t t-else="">
-                                            $<t t-esc="Math.round(account.balance.replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '') / 1310 * Math.pow(10, 2)) / Math.pow(10, 2)"/>
-                                        </t>
-                                    </td>
 
                                 </t>
                                 <t t-else="">
@@ -179,18 +137,7 @@
                                         <t t-raw="account['credit']"/>
                                         <t t-esc="currency[0]"/>
                                     </td>
-                                    <td class="mon_fld">
-                                        <t t-raw="account['balance']"/>
-                                        <t t-esc="currency[0]"/>
-                                    </td>
-                                    <td class="mon_fld">
-                                        <t t-if="account['balance'] == 0">
-                                            <span>-</span>
-                                        </t>
-                                        <t t-else="">
-                                            $<t t-esc="Math.round(account.balance.replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '') / 1310 * Math.pow(10, 2)) / Math.pow(10, 2)"/>
-                                    </t>
-                                    </td>
+
                                 </t>
 
                                 <t t-set="common_id" t-value="'a'+account['id']"/>
@@ -228,15 +175,13 @@
 
                             <td class="mon_fld" style="">
                                 <strong>
-                                    <!-- <t t-raw="Math.round(debit_total * Math.pow(10, 2)) / Math.pow(10, 2)"/> -->
-                                    <t t-esc="debit_total"/>
+                                    <t t-raw="Math.round(debit_total * Math.pow(10, 2)) / Math.pow(10, 2)"/>
                                     <t t-esc="currency[0]"/>
                                 </strong>
                             </td>
                             <td class="mon_fld" style="">
                                 <strong>
-                                    <!-- <t t-raw="Math.round(credit_total * Math.pow(10, 2)) / Math.pow(10, 2)"/> -->
-                                    <t t-esc="credit_total"/>
+                                    <t t-raw="Math.round(credit_total * Math.pow(10, 2)) / Math.pow(10, 2)"/>
                                     <t t-esc="currency[0]"/>
                                 </strong>
                             </td>

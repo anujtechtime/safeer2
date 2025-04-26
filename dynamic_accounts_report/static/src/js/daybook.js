@@ -9,7 +9,7 @@ odoo.define('dynamic_partner_daybook.daybook', function (require) {
     var QWeb = core.qweb;
     var _t = core._t;
 
-    var datepicker = require('web.datepicker');
+        var datepicker = require('web.datepicker');
     var time = require('web.time');
 
     window.click_num = 0;
@@ -107,9 +107,6 @@ odoo.define('dynamic_partner_daybook.daybook', function (require) {
                                     self.$el.find('.account').select2({
                                         placeholder: ' Accounts...',
                                     });
-                                    self.$el.find('.target_move').select2({
-                                        placeholder: 'Target Move...',
-                                    });
 
 
                             }
@@ -184,7 +181,7 @@ odoo.define('dynamic_partner_daybook.daybook', function (require) {
             }).then(function(data) {
 
                 var action = {
-//                    'type': 'ir_actions_dynamic_xlsx_download',
+                    'type': 'ir_actions_dynamic_xlsx_download',
                     'data': {
                          'model': 'account.day.book',
                          'options': JSON.stringify(data['filters']),
@@ -194,8 +191,7 @@ odoo.define('dynamic_partner_daybook.daybook', function (require) {
                          'dfr_data': JSON.stringify(data),
                     },
                 };
-//                return self.do_action(action);
-                core.action_registry.map.t_b.prototype.downloadXlsx(action)
+                return self.do_action(action);
             });
         },
 
@@ -241,7 +237,7 @@ odoo.define('dynamic_partner_daybook.daybook', function (require) {
             var account_id = $(event.currentTarget).data('account-id');
             var offset = 0;
             var td = $(event.currentTarget).next('tr').find('td');
-            if (td.length >= 2) {
+            if (td.length == 1) {
 
                     self._rpc({
                         model: 'account.day.book',
@@ -402,10 +398,10 @@ odoo.define('dynamic_partner_daybook.daybook', function (require) {
             if ($(".target_move").length) {
 
             var post_res = document.getElementById("post_res")
-            filter_data_selected.target_move = $(".target_move")[1].value
-            post_res.value = $(".target_move")[1].value
+            filter_data_selected.target_move = $(".target_move")[0].value
+            post_res.value = $(".target_move")[0].value
                     post_res.innerHTML=post_res.value;
-              if ($(".target_move")[1].value == "") {
+              if ($(".target_move")[0].value == "") {
               post_res.innerHTML="posted";
 
               }

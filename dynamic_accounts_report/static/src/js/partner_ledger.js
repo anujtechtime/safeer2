@@ -9,7 +9,7 @@ odoo.define('dynamic_accounts_report.partner_ledger', function (require) {
     var QWeb = core.qweb;
     var _t = core._t;
 
-    var datepicker = require('web.datepicker');
+        var datepicker = require('web.datepicker');
     var time = require('web.time');
 
     window.click_num = 0;
@@ -125,11 +125,9 @@ odoo.define('dynamic_accounts_report.partner_ledger', function (require) {
                             self.$el.find('.acc').select2({
                             placeholder: 'Select Acc...',
                             });
-                            self.$el.find('.target_move').select2({
-                                        placeholder: 'Target Move...',
-                                    });
                         }
                         var child=[];
+
                         self.$('.table_view_tb').html(QWeb.render('PLTable', {
                             report_lines : datas['report_lines'],
                             filter : datas['filters'],
@@ -199,7 +197,7 @@ odoo.define('dynamic_accounts_report.partner_ledger', function (require) {
                 ],
             }).then(function(data) {
                 var action = {
-//                    'type': 'ir_actions_dynamic_xlsx_download',
+                    'type': 'ir_actions_dynamic_xlsx_download',
                     'data': {
                          'model': 'account.partner.ledger',
                          'options': JSON.stringify(data['filters']),
@@ -209,8 +207,7 @@ odoo.define('dynamic_accounts_report.partner_ledger', function (require) {
                          'dfr_data': JSON.stringify(data),
                     },
                 };
-//                return self.do_action(action);
-                   core.action_registry.map.t_b.prototype.downloadXlsx(action)
+                return self.do_action(action);
             });
         },
 
@@ -237,7 +234,7 @@ odoo.define('dynamic_accounts_report.partner_ledger', function (require) {
             var account_id = $(event.currentTarget).data('account-id');
             var offset = 0;
             var td = $(event.currentTarget).next('tr').find('td');
-            if (td.length >= 1) {
+            if (td.length == 1) {
                    self._rpc({
                         model: 'account.partner.ledger',
                         method: 'view_report',
@@ -435,8 +432,8 @@ odoo.define('dynamic_accounts_report.partner_ledger', function (require) {
 
             if ($(".reconciled").length){
             var reconciled_res = document.getElementById("reconciled_res")
-            filter_data_selected.reconciled = $(".reconciled")[1].value
-            reconciled_res.value = $(".reconciled")[1].value
+            filter_data_selected.reconciled = $(".reconciled")[0].value
+            reconciled_res.value = $(".reconciled")[0].value
             reconciled_res.innerHTML=reconciled_res.value;
             if ($(".reconciled").value==""){
                 reconciled_res.innerHTML="unreconciled";
@@ -446,10 +443,10 @@ odoo.define('dynamic_accounts_report.partner_ledger', function (require) {
 
             if ($(".target_move").length) {
             var post_res = document.getElementById("post_res")
-            filter_data_selected.target_move = $(".target_move")[1].value
-            post_res.value = $(".target_move")[1].value
+            filter_data_selected.target_move = $(".target_move")[0].value
+            post_res.value = $(".target_move")[0].value
                     post_res.innerHTML=post_res.value;
-              if ($(".target_move")[1].value == "") {
+              if ($(".target_move")[0].value == "") {
               post_res.innerHTML="posted";
 
               }

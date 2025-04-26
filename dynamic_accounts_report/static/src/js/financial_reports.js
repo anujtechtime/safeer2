@@ -9,7 +9,7 @@ odoo.define('dynamic_accounts_report.financial_reports', function (require) {
     var QWeb = core.qweb;
     var _t = core._t;
 
-    var datepicker = require('web.datepicker');
+        var datepicker = require('web.datepicker');
     var time = require('web.time');
 
     window.click_num = 0;
@@ -40,10 +40,7 @@ odoo.define('dynamic_accounts_report.financial_reports', function (require) {
                 args: [{
                 }]
             }).then(function(t_res) {
-                console.log("t_res###############",t_res);
-                console.log("self.initial_render@@@@@@@@@@@@@@@",self.initial_render);
                 self.wizard_id = t_res;
-                self.lang = 'en_US'
                 self.load_data(self.initial_render);
             })
         },
@@ -88,35 +85,32 @@ odoo.define('dynamic_accounts_report.financial_reports', function (require) {
                         method: 'view_report',
                         args: [[this.wizard_id], action_title],
                     }).then(function(datas) {
-                        console.log("datas@@@@@@@@@@@@@@@@",datas);
-                        console.log("initial_render@@@@@@@@@@@@@@@@",initial_render);
 
-                        if (initial_render) {
-                            self.$('.filter_view_dfr').html(QWeb.render('DfrFilterView', {
-                                filter_data: datas['filters'],
-                                title : datas['name'],
-                            }));
-                            self.$el.find('.journals').select2({
-                                placeholder: ' Journals...',
-                            });
-                            self.$el.find('.account').select2({
-                                placeholder: ' Accounts...',
-                            });
-                            self.$el.find('.account-tag').select2({
-                                placeholder: 'Account Tag...',
-                            });
-                            self.$el.find('.analytics').select2({
-                                placeholder: 'Analytic Accounts...',
-                            });
-                            self.$el.find('.analytic-tag').select2({
-                                placeholder: 'Analytic Tag...',
-                            });
-                            self.$el.find('.target_move').select2({
-                                placeholder: 'Target Move...',
-                            });
 
-                        }
-                        var child=[];
+                            if (initial_render) {
+                                    self.$('.filter_view_dfr').html(QWeb.render('DfrFilterView', {
+                                        filter_data: datas['filters'],
+                                        title : datas['name'],
+                                    }));
+                                    self.$el.find('.journals').select2({
+                                        placeholder: ' Journals...',
+                                    });
+                                    self.$el.find('.account').select2({
+                                        placeholder: ' Accounts...',
+                                    });
+                                    self.$el.find('.account-tag').select2({
+                                        placeholder: 'Account Tag...',
+                                    });
+                                    self.$el.find('.analytics').select2({
+                                        placeholder: 'Analytic Accounts...',
+                                    });
+                                    self.$el.find('.analytic-tag').select2({
+                                        placeholder: 'Analytic Tag...',
+                                    });
+
+                            }
+                            var child=[];
+
                         self.$('.table_view_dfr').html(QWeb.render('dfr_table', {
 
                                             report_lines : datas['report_lines'],
@@ -127,10 +121,10 @@ odoo.define('dynamic_accounts_report.financial_reports', function (require) {
                                             debit_balance : datas['debit_balance'],
                                             bs_lines : datas['bs_lines'],
                                         }));
+
                 });
                     }
                 catch (el) {
-                    console.log("el#############",el);
                     window.location.href
                     }
             },
@@ -204,7 +198,7 @@ odoo.define('dynamic_accounts_report.financial_reports', function (require) {
                 ],
             }).then(function(data) {
                 var action = {
-//                    'type': 'ir_actions_dynamic_xlsx_download',
+                    'type': 'ir_actions_dynamic_xlsx_download',
                     'data': {
                          'model': 'dynamic.balance.sheet.report',
                          'options': JSON.stringify(data['filters']),
@@ -214,8 +208,7 @@ odoo.define('dynamic_accounts_report.financial_reports', function (require) {
                          'dfr_data': JSON.stringify(data['bs_lines']),
                     },
                 };
-//                return self.do_action(action);
-                    core.action_registry.map.t_b.prototype.downloadXlsx(action)
+                return self.do_action(action);
             });
         },
 
@@ -368,6 +361,7 @@ odoo.define('dynamic_accounts_report.financial_reports', function (require) {
 //                var dateString = $("#date_to").val();
 //                filter_data_selected.date_to = dateString;
 //            }
+
             if (this.$el.find('.datetimepicker-input[name="date_from"]').val()) {
                 filter_data_selected.date_from = moment(this.$el.find('.datetimepicker-input[name="date_from"]').val(), time.getLangDateFormat()).locale('en').format('YYYY-MM-DD');
             }
@@ -378,15 +372,14 @@ odoo.define('dynamic_accounts_report.financial_reports', function (require) {
 
             if ($(".target_move").length) {
                 var post_res = document.getElementById("post_res")
-                filter_data_selected.target_move = $(".target_move")[1].value
-                post_res.value = $(".target_move")[1].value
+                filter_data_selected.target_move = $(".target_move")[0].value
+                post_res.value = $(".target_move")[0].value
                         post_res.innerHTML=post_res.value;
-                  if ($(".target_move")[1].value == "") {
+                  if ($(".target_move")[0].value == "") {
                   post_res.innerHTML="posted";
 
                   }
             }
-
             rpc.query({
                 model: 'dynamic.balance.sheet.report',
                 method: 'write',

@@ -1,14 +1,8 @@
 <odoo>
 
-    <template id="dynamic_accounts_report.trial_balance">
-<!--    <t t-call="web.html_container">-->
-<!--        <t t-foreach="docs" t-as="doc">-->
-            <t t-call="dynamic_accounts_report.trial_balance1" t-lang="request.env.user.lang"/>
-<!--        </t>-->
-<!--    </t>-->
-</template>
 
-    <template id="dynamic_accounts_report.trial_balance1">
+
+    <template id="dynamic_accounts_report.trial_balance">
         <t t-call="web.html_container">
             <t t-call="web.internal_layout">
                 <div class="page">
@@ -81,10 +75,10 @@
                                             <t t-if="line['Init_balance']">
 
 												<td class="mon_fld">
-													<t t-out="line['Init_balance']['debit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+													<t t-raw="line['Init_balance']['debit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
 												</td>
 												<td class="mon_fld">
-													<t t-out="line['Init_balance']['credit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+													<t t-raw="line['Init_balance']['credit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
 												</td>
 											</t>
                                             <t t-else="">

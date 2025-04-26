@@ -1,10 +1,5 @@
 <templates>
     <t t-name="PartnerTemp">
-    <style>
-    .dropdown-toggle{
-      background-color:  #e2e4f1 !important;
-    }
-    </style>
         <div class="">
             <div class="">
                 <h1 style="padding:10px">
@@ -31,7 +26,6 @@
                             <th style="text-align:right;">Debit</th>
                             <th style="text-align:right;">Credit</th>
                             <th style="text-align:right;">Balance</th>
-                            <th style="text-align:right;">Amount In Currency</th>
                         </tr>
                     </thead>
 
@@ -63,9 +57,6 @@
                                         <t t-esc="currency[0]"/>
                                         <t t-raw="account['balance']"/>
                                     </td>
-                                    <td style="text-align:right;">
-                                        $<t t-esc="Math.round(account.balance.replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '') / 1310 * Math.pow(10, 2)) / Math.pow(10, 2)"/>
-                                    </td>
 
                                 </t>
                                 <t t-else="">
@@ -81,9 +72,6 @@
                                         <t t-raw="account['balance']"/>
                                         <t t-esc="currency[0]"/>
                                     </td>
-                                    <td style="text-align:right;">
-                                        $<t t-esc="Math.round(account.balance.replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '') / 1310 * Math.pow(10, 2)) / Math.pow(10, 2)"/>
-                                    </td>
 
                                 </t>
                                 <t t-set="common_id" t-value="'a'+account['id']"/>
@@ -95,24 +83,6 @@
                                 </td>
                             </tr>
                         </t>
-
-                        <tr>
-                        <!-- <t t-if="currency[1] == 'before'"> -->
-                        <td colspan="6"></td>
-                        <td style="text-align:right; color : green;">
-                            <t t-esc="currency[0]"/>
-                            <t t-raw="debit_total"/>
-                            
-                        </td>
-                        <td style="text-align:right;  color : green;">
-                            <t t-esc="currency[0]"/>
-                           <t t-raw="credit_total"/>
-                        </td>
-                        <td style="text-align:right;  color : green;">
-                            <t t-esc="currency[0]"/>
-                            <t t-raw="debit_balance"/>
-                        </td>
-                        </tr>
                     </tbody>
 
                 </table>
@@ -272,6 +242,7 @@
 
                         </div>
 
+
                         <div class="search-Target-move" style="">
                             <a type="button" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="fa fa-filter"></span>
@@ -283,20 +254,6 @@
                                 <option value="All">All Entries</option>
                             </select>
                             <span id="post_res"></span>
-                        </div>
-
-
-                        <div class="search-Reconciled" style="">
-                            <a type="button" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="fa fa-filter"></span>
-                                Reconciled status:
-                            </a>
-                            <select id="reconciled" class="dropdown-menu reconciled" name="states[]">
-                                <div role="separator" class="dropdown-divider"></div>
-                                <option value="unreconciled">Unreconciled</option>
-                                <option value="all">All</option>
-                            </select>
-                            <span id="reconciled_res"></span>
                         </div>
                         <div style="">
                             <button type="button" id="apply_filter" class="btn btn-primary"
@@ -327,7 +284,6 @@
                         <th style="text-align:right;">Debit</th>
                         <th style="text-align:right;">Credit</th>
                         <th style="text-align:right;">Balance</th>
-                        <th style="text-align:right;">Amount In Currency</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -388,9 +344,6 @@
                                     <t t-raw="account_line.balance"/>
 
                                 </td>
-                                <td t-att-style="style" class="amt"> 
-                                    $<t t-esc="account_line.lamountcurrency"/>
-                                </td>
 
                             </t>
                             <t t-else="">
@@ -405,9 +358,6 @@
                                 <td t-att-style="style" class="amt">
                                     <t t-raw="account_line.balance"/>
                                     <t t-raw="account_line.currency_code"/>
-                                </td>
-                                <td t-att-style="style" class="amt"> 
-                                    $<t t-esc="account_line.lamountcurrency"/>
                                 </td>
 
                             </t>

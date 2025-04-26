@@ -41,7 +41,6 @@
                                         </li>
                                     </t>
                                 </div>
-
                                 <div class="col-2">
                                     <strong>Partners:</strong>
                                     <t t-foreach="Filters['partners']" t-as="ps">
@@ -72,7 +71,6 @@
                                             <t t-esc="Filters['target_move']"/>
                                         </li>
                                 </div>
-
 
                         </div>
                         <div style="text-align:centre;left:50%;" class="row">
@@ -114,7 +112,6 @@
                                     <td groups="base.group_multi_currency"/>
                                 </tr>
                                 <tr t-foreach="account['move_lines']" t-as="line">
-<!--                                <tr t-foreach="account['move_lines']" t-as="line">-->
                                     <td><span t-esc="line['ldate']"/></td>
                                     <td><span t-esc="line['lcode']"/></td>
                                     <td><span t-esc="line['account_name']"/></td>
