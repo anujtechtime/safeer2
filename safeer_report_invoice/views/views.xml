@@ -1,0 +1,71 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="safeer_report_invoice.list">
+      <field name="name">safeer_report_invoice list</field>
+      <field name="model">safeer_report_invoice.safeer_report_invoice</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+<record model="ir.ui.view" id="view_any_name_account_move_form_added_move">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <!-- <field name="type">form</field> -->
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="name_to"/>
+                <field name="name_from"/>
+        </xpath>
+        </field>
+      </record>
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="safeer_report_invoice.action_window">
+      <field name="name">safeer_report_invoice window</field>
+      <field name="res_model">safeer_report_invoice.safeer_report_invoice</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="safeer_report_invoice.action_server">
+      <field name="name">safeer_report_invoice server</field>
+      <field name="model_id" ref="model_safeer_report_invoice_safeer_report_invoice"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="safeer_report_invoice" id="safeer_report_invoice.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="safeer_report_invoice.menu_1" parent="safeer_report_invoice.menu_root"/>
+    <menuitem name="Menu 2" id="safeer_report_invoice.menu_2" parent="safeer_report_invoice.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="safeer_report_invoice.menu_1_list" parent="safeer_report_invoice.menu_1"
+              action="safeer_report_invoice.action_window"/>
+    <menuitem name="Server to list" id="safeer_report_invoice" parent="safeer_report_invoice.menu_2"
+              action="safeer_report_invoice.action_server"/>
+-->
+  </data>
+</odoo>
